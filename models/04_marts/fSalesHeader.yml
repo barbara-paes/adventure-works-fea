@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: fSalesHeader
+    description: "General sales order information."
+    columns:
+      - name: salesorderid
+        description: "Primary key."
+        tests:  
+          - unique
+          - not_null
+      - name: fk_region
+        description: "Foreign key to the region dimension."
+        tests:
+          - relationships:
+              to: ref('dRegion')
+              field: sk_region
+      - name: fk_creditcard
+        description: "Foreign key to the credit card dimension."
+        tests:
+          - relationships:
+              to: ref('dCreditCard')
+              field: sk_creditcard
+      - name: fk_customer
+        description: "Foreign key to the customer dimension."
+        tests:
+          - relationships:
+              to: ref('dCustomer')
+              field: sk_customer
+      - name: fk_calendar
+        description: "Foreign key to the calendar dimension."
+        tests:
+          - relationships:
+              to: ref('dCalendar')
+              field: sk_calendar
+          - not_null
+      - name: reason_agg
+        description: "Aggregated sales reason per order."
+        tests: 
+          - not_null
+      - name: orderdate
+        description: "Dates the sales order was created."
+      - name: duedate
+        description: "Date the order is due to the customer."
+      - name: shipdate
+        description: "Date the order was shipped to the customer."
+      - name: order_status
+        description: "Order current status."
+      - name: sales_channel
+        description: "Sales channel, which can be physical or online."
+        tests:
+          - not_null
+      - name: subtotal
+        description: "Sales subtotal. Computed as SUM(SalesOrderDetail.LineTotal) for the appropriate SalesOrderID."
+      - name: taxamt
+        description: "Tax amount."
+      - name: freight
+        description: "Shipping cost."
+      - name: totaldue
+        description: "Total due from customer. Computed as Subtotal + TaxAmt + Freight."

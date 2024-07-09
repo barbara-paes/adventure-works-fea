@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: dProduct
+    description: "Table with product information."
+    columns:
+      - name: sk_product
+        description: "SK key generated for the table's unique identifier based on the productid and productnumber columns."
+        tests: 
+          - unique
+          - not_null
+      - name: productid
+        description: "Primary key for Product records."
+        tests: 
+          - unique
+          - not_null
+      - name: productsubcategoryid
+        description: "Primary key for ProductSubcategory records."
+      - name: productcategoryid
+        description: "Primary key for ProductCategory records."
+      - name: product_name
+        description: "Name of the product."
+      - name: productnumber
+        description: "Unique product identification number."
+        tests:
+          - unique
+          - not_null
+      - name: color
+        description: "Product color."
+      - name: size
+        description: "Product size."
+      - name: product_subcategory
+        description: "Subcategory description."
+      - name: product_category
+        description: "Category description."

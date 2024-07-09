@@ -1,0 +1,78 @@
+version: 2
+
+sources:
+  - name: person
+    schema: sap_adw
+    tables:
+      - name: person
+        description: >
+          "Human beings involved with AdventureWorks: employees, customer contacts, and vendor contacts."
+        columns:
+          - name: businessentityid
+            description: "Primary key for Person records."
+            tests: 
+              - unique
+              - not_null
+          - name: persontype
+            description: >
+              "Primary type of person: SC = Store Contact, IN = Individual (retail) customer, 
+              SP = Sales person, EM = Employee (non-sales), VC = Vendor contact, GC = General contact"
+          - name: firstname
+            description: "First name of the person."
+          - name: middlename
+            description: "Middle name or middle initial of the person."
+          - name: lastname
+            description: "Last name of the person."
+          - name: modifieddate
+            description: "Date and time the record was last updated."
+
+      - name: address
+        description: "Street address information for customers, employees, and vendors."
+        columns:
+          - name: addressid
+            description: "Primary key for Address records."
+            tests: 
+              - unique
+              - not_null
+          - name: stateprovinceid
+            description: >
+              "Unique identification number for the state or province. Foreign key to StateProvince table."
+          - name: addressline
+            description: "First street address line."
+          - name: city
+            description: "Name of the city."
+          - name: modifieddate
+            description: "Date and time the record was last updated."
+
+      - name: stateprovince
+        description: "State and province lookup table."
+        columns:
+          - name: stateprovinceid
+            description: "Primary key for StateProvince records."
+            tests: 
+              - unique
+              - not_null
+          - name: stateprovincecode
+            description: "ISO standard state or province code."
+          - name: countryregioncode
+            description: >
+              "ISO standard country or region code. Foreign key to CountryRegion.CountryRegionCode."
+          - name: territoryid
+            description: "ID of the territory in which the state or province is located. Foreign key to SalesTerritory.SalesTerritoryID."
+          - name: state_name
+            description: "State or province description."
+          - name: modifieddate
+            description: "Date and time the record was last updated."
+
+      - name: countryregion
+        description: "Lookup table containing the ISO standard codes for countries and regions."
+        columns:
+          - name: countryregioncode
+            description: "ISO standard code for countries and regions."
+            tests: 
+              - unique
+              - not_null
+          - name: country_name
+            description: "Country or region name."
+          - name: modifieddate
+            description: "Date and time the record was last updated."

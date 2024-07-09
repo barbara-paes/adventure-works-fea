@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: dCreditCard
+    description: "This table brings together information about customers' card details."
+    columns:
+      - name: sk_creditcard
+        description: "SK key generated for the table's unique identifier based on the creditcardid and cardtype columns."
+        tests:  
+          - unique
+          - not_null
+      - name: creditcardid
+        description: "Credit card identification number. Foreign key to CreditCard.CreditCardID."
+        tests:  
+          - unique
+          - not_null        
+      - name: businessentityid
+        description: "Business entity identification number. Foreign key to Person.BusinessEntityID."
+      - name: cardtype
+        description: "Credit card name."
+        tests:  
+          - not_null 

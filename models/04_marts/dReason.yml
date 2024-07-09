@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: dReason
+    description: "This table brings together information about addresses, cities and country/region related to customers."
+    columns:
+      - name: sk_reason
+        description: "SK key generated for the table's unique identifier based on the salesorderid, salesreasonid and reason columns."
+        tests: 
+          - unique
+          - not_null
+      - name: salesorderid
+        description: "Primary key. Foreign key to SalesOrderHeader.SalesOrderID."
+      # - name: salesreasonid
+      #   description: "Primary key for SalesReason records."
+      - name: reason_agg
+        description: "Aggregate purchase reason."
+      # - name: reasontype_agg
+      #   description: "Category the sales reason belongs to."

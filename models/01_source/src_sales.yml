@@ -1,0 +1,166 @@
+version: 2
+
+sources:
+  - name: sales
+    schema: sap_adw
+    tables:
+      - name: salesorderheader
+        description: "General sales order information."
+        columns:
+          - name: salesorderid
+            description: "Primary key."
+            tests: 
+              - unique
+              - not_null
+          - name: orderdate
+            description: "Dates the sales order was created."
+          - name: duedate
+            description: "Date the order is due to the customer."
+          - name: shipdate
+            description: "Date the order was shipped to the customer."
+          - name: status
+            description: >
+              "Order current status. 1 = In process; 2 = Approved; 3 = Backordered; 4 = Rejected; 
+              5 = Shipped; 6 = Cancelled"
+          - name: onlineorderflag
+            description: "0 = Order placed by sales person. 1 = Order placed online by customer."
+          - name: customerid
+            description: "Customer identification number. Foreign key to Customer.BusinessEntityID."
+          - name: salespersonid
+            description: "Sales person who created the sales order. Foreign key to SalesPerson.BusinessEntityID."
+          - name: territoryid
+            description: "Territory in which the sale was made. Foreign key to SalesTerritory.SalesTerritoryID."
+          - name: billtoaddressid
+            description: "Customer billing address. Foreign key to Address.AddressID."
+          - name: shiptoaddressid
+            description: "Customer shipping address. Foreign key to Address.AddressID."
+          - name: creditcardid
+            description: "Credit card identification number. Foreign key to CreditCard.CreditCardID."
+          - name: subtotal
+            description: >
+              "Sales subtotal. Computed as SUM(SalesOrderDetail.LineTotal)for the appropriate SalesOrderID."
+          - name: taxamt
+            description: "Tax amount."
+          - name: freight
+            description: "Shipping cost."
+          - name: totaldue
+            description: "Total due from customer. Computed as Subtotal + TaxAmt + Freight."
+          - name: modifieddate
+            description: "Date and time the record was last updated."
+
+      - name: salesorderheadersalesreason
+        description: "Cross-reference table mapping sales orders to sales reason codes."
+        columns:
+          - name: salesorderid
+            description: "Primary key. Foreign key to SalesOrderHeader.SalesOrderID."
+            tests: 
+              - not_null
+          - name: salesreasonid
+            description: "Primary key. Foreign key to SalesReason.SalesReasonID."
+          - name: modifieddate
+            description: "Date and time the record was last updated."    
+
+      - name: salesreason
+        description: "Lookup table of customer purchase reasons." 
+        columns:
+          - name: salesreasonid
+            description: "Primary key for SalesReason records."
+            tests: 
+              - unique
+              - not_null
+          - name: reason  
+            description: "Sales reason description."
+          - name: reasontype
+            description: "Category the sales reason belongs to."
+          - name: modifieddate
+            description: "Date and time the record was last updated."
+
+      - name: salesorderdetail
+        description: "Individual products associated with a specific sales order. See SalesOrderHeader."
+        columns:
+          - name: salesorderid
+            description: "Primary key. Foreign key to SalesOrderHeader.SalesOrderID."
+            tests: 
+              - not_null
+          - name: orderqty
+            description: "Quantity ordered per product."
+          - name: productid
+            description: "Product sold to customer. Foreign key to Product.ProductID."
+          - name: unitprice
+            description: "Selling price of a single product."
+          - name: unitpricediscount
+            description: "Discount amount."
+          - name: linetotal
+            description: "Per product subtotal. Computed as UnitPrice * (1 - UnitPriceDiscount) * OrderQty."
+          - name: modifieddate
+            description: "Date and time the record was last updated."
+
+      - name: salesterritory
+        description: "Sales territory lookup table."
+        columns:
+          - name: territoryid
+            description: "Primary key for SalesTerritory records."
+            tests: 
+              - unique
+              - not_null
+          - name: territory
+            description: "Sales territory description."
+          - name: countryregioncode
+            description: "ISO standard country or region code. Foreign key to CountryRegion.CountryRegionCode."
+          - name: group
+            description: "Geographic area to which the sales territory belong."
+          - name: salesytd
+            description: "Sales in the territory year to date."
+          - name: saleslastyear
+            description: "Sales in the territory the previous year."
+          - name: costytd
+            description: "Business costs in the territory year to date."
+          - name: costlastyear
+            description: "Business costs in the territory the previous year."
+          - name: modifieddate
+            description: "Date and time the record was last updated."
+
+      - name: creditcard
+        description: "Customer credit card information."
+        columns:
+          - name: creditcardid
+            description: "Primary key for CreditCard records."
+            tests: 
+              - unique
+              - not_null
+          - name: cardtype
+            description: "Credit card name."
+          - name: modifieddate
+            description: "Date and time the record was last updated."
+
+      - name: personcreditcard
+        description: >
+          "Cross-reference table mapping people to their credit card information in the CreditCard table."
+        columns:
+          - name: businessentityid
+            description: "Business entity identification number. Foreign key to Person.BusinessEntityID."
+            tests: 
+              - unique
+              - not_null
+          - name: creditcardid
+            description: "Credit card identification number. Foreign key to CreditCard.CreditCardID."
+          - name: modifieddate
+            description: 	"Date and time the record was last updated."
+
+      - name: customer
+        description: "Current customer information."
+        columns:
+          - name: customerid
+            description: "Primary key."
+            tests: 
+              - unique
+              - not_null
+          - name: personid
+            description: "Foreign key to Person.BusinessEntityID"
+          - name: storeid
+            description: "Foreign key to Store.BusinessEntityID"
+          - name: territoryid
+            description: >
+              "ID of the territory in which the customer is located. Foreign key to SalesTerritory.SalesTerritoryID."
+          - name: modifieddate
+            description: "Date and time the record was last updated."

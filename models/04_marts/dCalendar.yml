@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: dCalendar
+    description: "This is a table created using the dbt calendar macro."
+    columns:
+      - name: sk_calendar
+        description: "SK key generated for the table's unique identifier based on the date_day and day_of_week_name columns."
+        tests:  
+          - unique
+          - not_null

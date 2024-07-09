@@ -1,0 +1,65 @@
+version: 2
+
+sources:
+  - name: production
+    schema: sap_adw
+    tables:
+      - name: product
+        description: "Products sold or used in the manfacturing of sold products."
+        columns:
+          - name: productid
+            description: "Primary key for Product records."
+            tests: 
+              - unique
+              - not_null
+          - name: productsubcategoryid
+            description: >
+              "Product is a member of this product subcategory. 
+              Foreign key to ProductSubCategory.ProductSubCategoryID."
+          - name: product_name
+            description: "Name of the product."
+          - name: productnumber
+            description: "Unique product identification number."
+          - name: color
+            description: "Product color."
+          - name: size
+            description: "Product size."
+          - name: productline
+            description: "R = Road, M = Mountain, T = Touring, S = Standard"
+          - name: style
+            description: "W = Womens, M = Mens, U = Universal"
+          - name: standardcost
+            description: "Standard cost of the product."
+          - name: listprice
+            description: "Selling price."
+          - name: modifieddate
+            description: "Date and time the record was last updated."
+
+      - name: productsubcategory
+        description: "Product subcategories. See ProductCategory table."
+        columns:
+          - name: productsubcategoryid
+            description: "Primary key for ProductSubcategory records."
+            tests: 
+              - unique
+              - not_null
+          - name: productcategoryid
+            description: >
+              "Product category identification number. Foreign key to ProductCategory.ProductCategoryID."
+          - name: product_subcategory
+            description: "Subcategory description."
+          - name: modifieddate
+            description: "Date and time the record was last updated."
+
+      - name: productcategory
+        description: "High-level product categorization."
+        columns:
+          - name: productcategoryid
+            description: "Primary key for ProductCategory records."
+            tests: 
+              - unique
+              - not_null
+          - name: product_category
+            description: "Category description."
+          - name: modifieddate
+            description: "Date and time the record was last updated."

@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: dRegion
+    description: "This table brings together information about addresses, cities and country/region related to customers."
+    columns:
+      - name: sk_region
+        description: "SK key generated for the table's unique identifier based on the address_id, addressline and city columns."
+        tests: 
+          - unique
+          - not_null
+      - name: addressid
+        description: "Primary key for Address records."
+        tests: 
+          - unique
+          - not_null
+      - name: stateprovinceid
+        description: "Unique identification number for the state or province. Foreign key to StateProvince table."
+      - name: territoryid
+        description: "ID of the territory in which the state or province is located. Foreign key to SalesTerritory.SalesTerritoryID."
+      - name: addressline
+        description: "First street address line."
+      - name: city
+        description: "Name of the city."
+      - name: state_name
+        description: "State or province description."
+      - name: stateprovincecode
+        description: "ISO standard state or province code."
+      - name: country_name
+        description: "Country or region name."
+      - name: countryregioncode
+        description: "ISO standard country or region code. Foreign key to CountryRegion.CountryRegionCode."
+      - name: continent
+        description: "Sales territory description."

@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: fSalesDetail
+    description: "This is a table for individual products associated with a specific sales order."
+    columns:
+      - name: salesorderid
+        description: "Foreign key to SalesOrderHeader.SalesOrderID."
+        tests:  
+          - not_null
+      - name: fk_product
+        description: "Foreign key to the dProduct product table."
+        tests:
+          - relationships:
+              to: ref('dProduct')
+              field: sk_product
+          - not_null
+      - name: productid
+        description: "Product sold to customer. Foreign key to Product.ProductID."
+      - name: orderqty
+        description: "Quantity ordered per product."
+      - name: unitprice
+        description: "Selling price of a single product."
+      - name: unitpricediscount
+        description: "Discount amount."
+      - name: linetotal
+        description: "Per product subtotal. Computed as UnitPrice * (1 - UnitPriceDiscount) * OrderQty."
