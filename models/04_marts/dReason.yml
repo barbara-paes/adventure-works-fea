@@ -11,9 +11,6 @@ models:
           - not_null
       - name: salesorderid
         description: "Primary key. Foreign key to SalesOrderHeader.SalesOrderID."
-      # - name: salesreasonid
-      #   description: "Primary key for SalesReason records."
       - name: reason_agg
         description: "Aggregate purchase reason."
-      # - name: reasontype_agg
-      #   description: "Category the sales reason belongs to."
+

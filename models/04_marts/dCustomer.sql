@@ -28,13 +28,13 @@ with
             customer.customerid
             , person.businessentityid
             , customer.storeid
-            , person.persontype
             , person.firstname
             , person.middlename
             , person.lastname
             , person.fullname
         from customer
         left join person on customer.customerid = person.businessentityid
+        where person.persontype = 'IN'
     )
 
     , dCustomer as (

@@ -20,10 +20,6 @@ models:
           - unique
       - name: storeid
         description: "Foreign key to Store.BusinessEntityID"
-      - name: persontype
-        description: >
-          "Primary type of person: SC = Store Contact, IN = Individual (retail) customer, 
-          SP = Sales person, EM = Employee (non-sales), VC = Vendor contact, GC = General contact"
       - name: firstname
         description: "First name of the person."
       - name: middlename
