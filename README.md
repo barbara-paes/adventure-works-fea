@@ -1,25 +1,45 @@
-# Indicium Academy
+# Data Modeling Project - Adventure Works
 
-Repositório para ser utilizado no desafio para a obtenção da certificação de Analytics Engineer by Indicium. Faça o fork deste repositório e o utilize durante o desafio para fazer a insgestão das tabelas do SAP do Adventure Works.
+## About the Project
 
-## Instruções
+This project was developed by **Jeniffer Sanches** to showcase my skills in **dbt**, **data modeling**, and **data structuring**, transforming a database from an **OLTP** environment into **OLAP** for consumption in a **Data Warehouse** and a **BI tool**.
 
-Todas as tabelas do banco fonte do SAP da Adventure Works serão carregadas como seeds pelo dbt. Os arquivos .csv com os dados já estão na pasta de seeds.
+The database used is **Adventure Works**, which is a sample database from Microsoft for **online transaction processing (OLTP)**. Adventure Works simulates a fictional multinational manufacturing company called **Adventure Works Cycles**.
 
-Para fazer o carregamento de todas as tabelas usem o comando:
-- `dbt seed`
+## Objectives
 
-Para carregar uma tabela especifíca utilizem o comando
-- `dbt seed -s nome_do_csv`
+The goal of this project was to perform **data modeling** of the Adventure Works database, making the data available for consumption in a **BigQuery Data Warehouse** and also in a **sales dashboard in PowerBI**.
 
-### Problemas comuns
+## Project Steps
 
-Em caso a linha de comando do dbt fique com o status de estar sempre carregando, ou, o job do comando `dbt seed` fique rodando indefinitivamente mesmo após as 64 tabelas forem carregadas você precisará reiniciar o terminal. Para isso, clique nos três pontos no canto inferior direito ou no lado direito da linha de comando e escolha a opção `Restart IDE`.
+1. **Data Extraction and Modeling**: 
+   - I used **dbt** to model the data.
+   - **Two fact tables** were created:
+     - **Order Fact**: with a granularity at the order level.
+     - **Product Fact**: with a granularity at the product level.
+   
+2. **Dimension Tables**:
+   - **Product**
+   - **Customer**
+   - **Credit Card**
+   - **Region**
+   - **Calendar**
 
+3. **Storage and Consumption**:
+   - The data was made available for querying in **BigQuery**.
+   - A **sales dashboard** was created in **PowerBI**, presenting sales metrics, trends, and analysis.
 
-## Recursos:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [dbt community](http://community.getbdt.com/) to learn from other analytics engineers
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+## Technologies Used
+
+- **dbt**
+- **BigQuery**
+- **PowerBI**
+- **SQL**
+
+## Access the Project
+
+- [View the dashboard in PowerBI](#) (https://bit.ly/3XquKNf)
+
+## Contact
+
+If you have any questions or suggestions, feel free to contact me via [LinkedIn](https://www.linkedin.com/in/jeniffer-sanches/).
